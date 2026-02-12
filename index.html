@@ -3,363 +3,262 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Serene Sip</title>
-
+    <title>Cherry Pink Valentine Flowers</title>
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap");
       * {
-        background-color: bisque;
-        padding: 0;
         margin: 0;
+        padding: 0;
         box-sizing: border-box;
       }
+
+      :root {
+        --bg-dark: #15050f;
+        --pink-1: #ff6fae;
+        --pink-2: #ff8fc1;
+        --pink-3: #ffd0e6;
+        --stem: #c33b7a;
+        --leaf: #d96a99;
+      }
+
       body {
-        background-color: bisque;
+        min-height: 100vh;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        overflow: hidden;
+        background: radial-gradient(circle at 50% 20%, #5a1336 0%, #2a0a1a 40%, var(--bg-dark) 75%);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
-      header {
+
+      .night {
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(circle at 50% 25%, rgba(255, 120, 180, 0.4), transparent 45%),
+          radial-gradient(circle at 20% 80%, rgba(255, 80, 140, 0.16), transparent 35%),
+          radial-gradient(circle at 80% 85%, rgba(255, 100, 160, 0.16), transparent 35%);
+        filter: blur(0.2vmin);
+      }
+
+      .valentine-message {
+        position: fixed;
+        top: 7vh;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        color: #ffe8f3;
+        text-shadow: 0 0 12px rgba(255, 120, 190, 0.8), 0 0 28px rgba(255, 90, 160, 0.5);
+        z-index: 30;
+        pointer-events: none;
+      }
+
+      .valentine-message h1 {
+        font-size: clamp(1.8rem, 4vw, 3rem);
+        letter-spacing: 1px;
+        margin-bottom: 0.35rem;
+      }
+
+      .valentine-message p {
+        font-size: clamp(1rem, 2vw, 1.35rem);
+      }
+
+      .flowers {
+        position: relative;
+        width: min(95vw, 1100px);
+        height: 82vh;
+        transform: scale(0.95);
+        z-index: 10;
+      }
+
+      .flower {
+        position: absolute;
+        bottom: 4vmin;
+        transform-origin: bottom center;
+        animation: sway 4s ease-in-out infinite;
+      }
+
+      .flower .stem {
+        width: 1.3vmin;
+        height: var(--stem-h, 52vmin);
+        margin: 0 auto;
+        background: linear-gradient(to top, #7a1f49, var(--stem));
+        border-radius: 1vmin;
+      }
+
+      .flower .bloom {
+        position: absolute;
+        left: 50%;
+        top: calc(-1 * var(--bloom-y, 7vmin));
+        transform: translateX(-50%);
+        width: 14vmin;
+        height: 14vmin;
+      }
+
+      .petal {
+        position: absolute;
+        width: 7.4vmin;
+        height: 10vmin;
+        left: 50%;
+        bottom: 50%;
+        transform-origin: bottom center;
+        border-radius: 60% 60% 40% 40%;
+        background: linear-gradient(to top, var(--pink-1), var(--pink-3));
+        box-shadow: inset 0 0 1.8vmin rgba(255, 255, 255, 0.35), 0 0 1.2vmin rgba(255, 105, 170, 0.4);
+      }
+
+      .petal.p1 { transform: translate(-50%, 10%) rotate(0deg); }
+      .petal.p2 { transform: translate(-50%, 10%) rotate(45deg); }
+      .petal.p3 { transform: translate(-50%, 10%) rotate(90deg); }
+      .petal.p4 { transform: translate(-50%, 10%) rotate(135deg); }
+      .petal.p5 { transform: translate(-50%, 10%) rotate(180deg); }
+      .petal.p6 { transform: translate(-50%, 10%) rotate(225deg); }
+      .petal.p7 { transform: translate(-50%, 10%) rotate(270deg); }
+      .petal.p8 { transform: translate(-50%, 10%) rotate(315deg); }
+
+      .center {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 4vmin;
+        height: 4vmin;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, #fff7fb, #ffb7d7 70%);
+        box-shadow: 0 0 1.2vmin rgba(255, 180, 220, 0.8);
+      }
+
+      .leaf {
+        position: absolute;
+        width: 7vmin;
+        height: 3.2vmin;
+        border-radius: 100% 0 100% 0;
+        background: linear-gradient(to right, #a0295f, var(--leaf));
+        box-shadow: inset 0 0 1vmin rgba(255, 255, 255, 0.18);
+      }
+
+      .leaf.l1 { left: 50%; bottom: 26vmin; transform: rotate(24deg); }
+      .leaf.l2 { right: 50%; bottom: 17vmin; transform: scaleX(-1) rotate(14deg); }
+      .leaf.l3 { left: 50%; bottom: 9vmin; transform: rotate(-10deg); }
+
+      .flower.f1 { left: 11%; --stem-h: 48vmin; --bloom-y: 8vmin; animation-delay: 0s; }
+      .flower.f2 { left: 22%; --stem-h: 58vmin; --bloom-y: 8vmin; animation-delay: .4s; }
+      .flower.f3 { left: 34%; --stem-h: 52vmin; --bloom-y: 8vmin; animation-delay: .8s; }
+      .flower.f4 { left: 46%; --stem-h: 60vmin; --bloom-y: 9vmin; animation-delay: 1.1s; }
+      .flower.f5 { left: 58%; --stem-h: 50vmin; --bloom-y: 8vmin; animation-delay: 1.4s; }
+      .flower.f6 { left: 70%; --stem-h: 57vmin; --bloom-y: 9vmin; animation-delay: 1.7s; }
+      .flower.f7 { left: 82%; --stem-h: 49vmin; --bloom-y: 8vmin; animation-delay: 2s; }
+
+      .floating-hearts {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 20;
+      }
+
+      .heart {
+        position: absolute;
+        bottom: -10vmin;
+        width: var(--size, 2.2vmin);
+        height: var(--size, 2.2vmin);
+        transform: rotate(-45deg);
+        background: #ff234f;
+        opacity: 0.85;
+        filter: drop-shadow(0 0 8px rgba(255, 35, 79, 0.65));
+        animation: rise var(--dur, 8s) linear infinite;
+        animation-delay: var(--delay, 0s);
+        left: var(--x, 50%);
+      }
+
+      .heart::before,
+      .heart::after {
+        content: "";
+        position: absolute;
         width: 100%;
-        text-align: center;
-        padding: 20px;
+        height: 100%;
+        background: inherit;
+        border-radius: 50%;
       }
 
-      header h1,
-      #our-menu h2,
-      #about-us h2,
-      #contact-us h2 {
-        text-transform: uppercase;
-        font-family: "Playfair Display SC", serif;
-        color: #49281a;
-        padding: 10px;
-      }
-      header p {
-        font-family: lato;
-        padding: 10px 0;
+      .heart::before {
+        top: -50%;
+        left: 0;
       }
 
-      .btn {
-        background-color: #49281a;
-        display: block;
-        width: 180px;
-        height: 40px;
-        line-height: 40px;
-        text-decoration: none;
-        color: white;
-        border-radius: 8px;
-        margin: 10px auto;
-      }
-      nav {
-        padding: 20px;
-        text-align: center;
-        /* background-color: aqua; */
-      }
-      nav a {
-        padding: 0 20px;
-        text-decoration: none;
-        color: #49281a;
-        /* font-weight: bold; */
-        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-      }
-      #our-menu {
-        background-color: white;
-        border-top: 1px solid black;
-      }
-      #our-menu .menu {
-        font-family: lato;
-        padding: 10px;
+      .heart::after {
+        top: 0;
+        left: 50%;
       }
 
-      #about-us {
-        border-top: 1px solid black;
+      .ground-glow {
+        position: absolute;
+        left: 50%;
+        bottom: -10vmin;
+        transform: translateX(-50%);
+        width: 90vmin;
+        height: 26vmin;
+        background: radial-gradient(ellipse at center, rgba(255, 90, 165, 0.5), transparent 65%);
+        z-index: 2;
+        filter: blur(1.4vmin);
       }
 
-      #about-us p,
-      #contact-us p {
-        padding: 10px;
-        text-align: justify;
-        line-height: 1.5;
-        font-family: lato;
+      @keyframes sway {
+        0%, 100% { transform: rotate(2deg); }
+        50% { transform: rotate(-2deg); }
       }
 
-      #contact-us {
-        border-top: 1px solid black;
+      @keyframes rise {
+        0% { transform: translateY(0) translateX(0) scale(0.7) rotate(-45deg); opacity: 0; }
+        10% { opacity: 0.85; }
+        50% { transform: translateY(-45vh) translateX(2vmin) scale(1) rotate(-45deg); }
+        100% { transform: translateY(-95vh) translateX(-2vmin) scale(1.12) rotate(-45deg); opacity: 0; }
       }
 
-      footer {
-        padding: 50px 0;
-        border-top: 1px solid black;
-        margin-top: 30px;
-        text-align: center;
-        font-family: lato;
+      .not-loaded * {
+        animation-play-state: paused !important;
       }
-      
-      .card {
-        width: 290px;
-        border: 1px solid black;
-        text-align: center;
-        /* background-color: burlywood; */
-        margin: 30px;
-        padding: 10px;
-        font-family: sans-serif;
-        border-radius: 5px;
-      }
-
-      .card-img-top {
-        max-width: 100%;
-        border-radius: 5px;
-        /* height: 80px; */
-      }
-
-      .card-title,
-      .card-text {
-        /* background-color: pink; */
-        padding-top: 10px;
-        /* margin: 10px; */
-      }
-      .font-italic {
-        font-style: italic;
-      }
-
-      form {
-        /* border: 1px solid black; */
-        width: 400px;
-        padding: 10px;
-        margin-bottom: 10px;
-        font-family: lato;
-        
-      }
-
-      label {
-        display: inline-block;
-        width: 100px;
-        text-align: left;
-      }
-      
-      form div {
-        /* background-color: green; */
-        padding: 10px 0;
-        margin-bottom: 10px;
-      }
-
-     input[type="text"], input[type="email"], #message textarea {
-      width: 250px;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid black;
-      outline: none;
-     }
-
-     #message {
-      display: flex;
-      align-items: center;
-
-     }
-      
     </style>
   </head>
+  <body class="not-loaded">
+    <div class="night"></div>
 
-  <body>
-    <!-- header section -->
-    <header section="home">
-      <h1>Welcome to Serene Sip</h1>
-      <p>Indulge in the finest coffee experience crafted just for you.</p>
-      <a href="#our-menu" class="btn">Explore Our Menu</a>
-    </header>
+    <div class="valentine-message">
+      <h1>Happy Valentine&apos;s Day!</h1>
+      <p>Thank you for being my date.</p>
+    </div>
 
-    <!-- nav section -->
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#our-menu">Menu</a>
-      <a href="#about-us">About Us</a>
-      <a href="#contact-us">Contact</a>
-    </nav>
+    <div class="floating-hearts" aria-hidden="true">
+      <div class="heart" style="--x: 8%; --dur: 9s; --delay: 0s; --size: 1.8vmin"></div>
+      <div class="heart" style="--x: 15%; --dur: 8.1s; --delay: 1.2s; --size: 2.3vmin"></div>
+      <div class="heart" style="--x: 24%; --dur: 7.4s; --delay: 0.5s; --size: 2.1vmin"></div>
+      <div class="heart" style="--x: 35%; --dur: 8.8s; --delay: 2s; --size: 2.8vmin"></div>
+      <div class="heart" style="--x: 44%; --dur: 7.9s; --delay: 1.5s; --size: 2vmin"></div>
+      <div class="heart" style="--x: 54%; --dur: 9.6s; --delay: 2.4s; --size: 2.5vmin"></div>
+      <div class="heart" style="--x: 62%; --dur: 7.8s; --delay: .7s; --size: 1.9vmin"></div>
+      <div class="heart" style="--x: 71%; --dur: 8.6s; --delay: 1.8s; --size: 2.7vmin"></div>
+      <div class="heart" style="--x: 81%; --dur: 7.2s; --delay: 0.4s; --size: 2.2vmin"></div>
+      <div class="heart" style="--x: 90%; --dur: 9.1s; --delay: 2.1s; --size: 2.4vmin"></div>
+    </div>
 
-    <!-- our menu section -->
+    <div class="flowers">
+      <div class="ground-glow"></div>
 
-    <section id="our-menu">
-      <h2>Our Menu</h2>
+      <div class="flower f1"><div class="bloom"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div><div class="petal p7"></div><div class="petal p8"></div><div class="center"></div></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div><div class="leaf l3"></div></div>
+      <div class="flower f2"><div class="bloom"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div><div class="petal p7"></div><div class="petal p8"></div><div class="center"></div></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div><div class="leaf l3"></div></div>
+      <div class="flower f3"><div class="bloom"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div><div class="petal p7"></div><div class="petal p8"></div><div class="center"></div></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div><div class="leaf l3"></div></div>
+      <div class="flower f4"><div class="bloom"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div><div class="petal p7"></div><div class="petal p8"></div><div class="center"></div></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div><div class="leaf l3"></div></div>
+      <div class="flower f5"><div class="bloom"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div><div class="petal p7"></div><div class="petal p8"></div><div class="center"></div></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div><div class="leaf l3"></div></div>
+      <div class="flower f6"><div class="bloom"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div><div class="petal p7"></div><div class="petal p8"></div><div class="center"></div></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div><div class="leaf l3"></div></div>
+      <div class="flower f7"><div class="bloom"><div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div><div class="petal p7"></div><div class="petal p8"></div><div class="center"></div></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div><div class="leaf l3"></div></div>
+    </div>
 
-      <!-- for coffee -->
-      <div class="menu">
-        <h3>Coffee Selections</h3>
-        <div class="card">
-          <img class="card-img-top" src="image/americano.jpg" alt="Americano" />
-          <h3 class="card-title">Americano</h3>
-          <p class="card-text font-italic">$2.50</p>
-          <p class="card-text">
-            Strong and black coffee. Perfect for the bold coffee enthusiast.
-            <a href="#" class="btn">Order Now</a>
-          </p>
-        </div>
-
-        <div class="card">
-          <img
-            class="card-img-top"
-            src="image/caramel-macchiato.jpg"
-            alt="caramel-macchiato"
-          />
-          <h3 class="card-title">Caramel Macchiato</h3>
-          <p class="card-text font-italic">$4.50</p>
-          <p class="card-text">
-            Espresso with steamed milk and caramel drizzle. A sweet and
-            indulgent treat.
-            <a href="#" class="btn">Order Now</a>
-          </p>
-        </div>
-
-        <div class="card">
-          <img
-            class="card-img-top"
-            src="image/vanilla-latte.jpg"
-            alt="vanilla-latte"
-          />
-          <h3 class="card-title">Vanilla Latte</h3>
-          <p class="card-text font-italic">$4.25</p>
-          <p class="card-text">
-            Espresso with steamed milk and a hint of vanilla. Smooth and
-            aromatic.
-            <a href="#" class="btn">Order Now</a>
-          </p>
-        </div>
-
-        <div class="card">
-          <img class="card-img-top" src="image/cold-brew.jpg" alt="cold-brew" />
-          <h3 class="card-title">Cold Brew</h3>
-          <p class="card-text font-italic">$3.75</p>
-          <p class="card-text">
-            Refreshing cold coffee brewed to perfection. Perfect for a hot day.
-            <a href="#" class="btn">Order Now</a>
-          </p>
-        </div>
-      </div>
-
-      <!-- for snack  -->
-      <div class="menu">
-        <h3>Delicious Snacks</h3>
-
-        <div class="card">
-          <img
-            class="card-img-top"
-            src="image/classic-crossiant.jpg"
-            alt="classic-crossiant"
-          />
-          <h3 class="card-title">Classic Crossiant</h3>
-          <p class="card-text font-italic">$2.50</p>
-          <p class="card-text">
-            Light, flaky, and buttery. A timeless delight.
-            <a href="#" class="btn">Order Now</a>
-          </p>
-        </div>
-
-        <div class="card">
-          <img
-            class="card-img-top"
-            src="image/almond-crossiant.jpg"
-            alt="almond-crossiant"
-          />
-          <h3 class="card-title">Almond Crossiant</h3>
-          <p class="card-text font-italic">$3.00</p>
-          <p class="card-text">
-            Classic croissant filled with almond paste. Irresistibly flaky and
-            nutty.
-            <a href="#" class="btn">Order Now</a>
-          </p>
-        </div>
-
-        <div class="card">
-          <img
-            class="card-img-top"
-            src="image/bagel-with-cream-cheese.jpg"
-            alt="bagel-with-cream-cheese"
-          />
-          <h3 class="card-title">Bagel with Cream Cheese</h3>
-          <p class="card-text font-italic">$2.50</p>
-          <p class="card-text">
-            Freshly baked bagel served with cream cheese. A simple and
-            satisfying choice.
-            <a href="#" class="btn">Order Now</a>
-          </p>
-        </div>
-
-        <div class="card">
-          <img
-            class="card-img-top"
-            src="image/chocolate-crossiant.jpg"
-            alt="chocolate-crossiant"
-          />
-          <h3 class="card-title">chocolate Crossiant</h3>
-          <p class="card-text font-italic">$3.25</p>
-          <p class="card-text">
-            Buttery croissant with a rich chocolate filling. A decadent pastry
-            delight.
-            <a href="#" class="btn">Order Now</a>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- about us section -->
-    <section id="about-us">
-      <h2>About Us</h2>
-      <p>Welcome to Serene Sips Café, where every cup tells a story!</p>
-      <p>
-        Founded in 2020, our coffee journey began with a passion for creating a
-        cozy haven for coffee lovers. We believe in the artistry of brewing, the
-        warmth of community, and the joy found in a perfect cup of coffee.
-      </p>
-      <p>
-        At Serene Sips Café, we source the finest coffee beans from around the
-        world, ensuring a rich and flavorful experience in every sip. Our
-        commitment to quality extends to our cozy atmosphere, where each visit
-        feels like a comforting conversation among friends.
-      </p>
-      <p>
-        Our skilled baristas craft each cup with precision and care, aiming to
-        provide you with a delightful coffee experience every time. Whether
-        you're a seasoned coffee enthusiast or a casual sipper, our diverse menu
-        caters to every taste and preference.
-      </p>
-      <p>
-        Join us in this journey of aroma, flavor, and community. Discover the
-        magic that happens when passion meets a perfectly brewed cup of coffee
-        at Serene Sips Café.
-      </p>
-    </section>
-
-    <!-- contact us section -->
-    <section id="contact-us">
-      <h2>Contact Us</h2>
-      <p>
-        We'd love to hear from you! Reach out to us with any questions,
-        feedback, or sepcial request.
-      </p>
-
-      <form action="">
-        <div>
-          <label for="">Your Name</label>
-          <input type="text" name="" id="" />
-        </div>
-      </br>
-
-        <div>
-          <label for="">Your Email</label>
-          <input type="email" name="" id="" />
-        </div>
-      </br>
-        
-        <div id="message">
-          <label for="">Your Message</label>
-          <textarea name="Message" id="Message" rows="7"></textarea>
-        </div>
-
-        <input class="btn" type="submit" value="Send Message"></button>
-      </form>
-    </section>
-
-    <!-- footer section -->
-    <footer>
-      <p>Copyright &copy; 2024, Serene Sips. All Rights Reserved.</p>
-      <a href="#home">Go To Top</a>
-    </footer>
+    <script>
+      onload = () => {
+        const c = setTimeout(() => {
+          document.body.classList.remove("not-loaded");
+          clearTimeout(c);
+        }, 700);
+      };
+    </script>
   </body>
 </html>
